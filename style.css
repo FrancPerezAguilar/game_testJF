@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  height: 100vh;
+  width: auto;
+  border: none;
+  background-color: black;
+  color: white;
+  font-family: "Press Start 2P";
+}
+
+.scoring {
+  height: 5vh;
+  font-size: 2em;
+  text-align: center;
+}
+
+#points,
+#progress {
+  display: inline;
+}
+
+.game-container {
+  height: 95vh;
+  width: auto;
+  background-color: aqua;
+}
+
+#player1 {
+  position: absolute;
+  left: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+
+  bottom: 0;
+  background-color: deeppink;
+}
+
+.meteor {
+  display: block;
+  position: relative;
+  animation: meteor-move 4s;
+}
+
+#shot {
+  position: absolute;
+  top: 0;
+}
