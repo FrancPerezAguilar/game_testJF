@@ -1,5 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 
+@keyframes shotFX {
+  0% {
+    bottom: 0%;
+  }
+  100% {
+    bottom: 100%;
+  }
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -16,6 +25,7 @@ body {
 }
 
 .scoring {
+  z-index: 500;
   height: 5vh;
   font-size: 2em;
   text-align: center;
@@ -35,6 +45,7 @@ body {
 #player1 {
   position: absolute;
   left: 50%;
+  z-index: 500;
 
   display: flex;
   align-items: center;
@@ -44,7 +55,7 @@ body {
   height: 60px;
   border-radius: 50%;
 
-  bottom: 0;
+  bottom: 10px;
   background-color: deeppink;
 }
 
@@ -57,4 +68,12 @@ body {
 #shot {
   position: absolute;
   top: 0;
+}
+
+.bullet {
+  position: absolute;
+  height: 5px;
+  width: 5px;
+  background-color: black;
+  animation: shotFX 3s;
 }

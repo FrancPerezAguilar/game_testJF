@@ -1,3 +1,4 @@
+const STEP = 25;
 let nau = document.getElementById('player1');
 x = nau.offsetLeft;
 y = nau.offsetTop;
@@ -6,17 +7,14 @@ console.log(window.innerHeight, window.innerWidth)
 
 const log = document.getElementById('log');
 
-document.addEventListener('keypress', logKey);
-
+document.addEventListener('keydown', logKey);
 
 function logKey(e) {
-
-    const percentile = 0.02;
     //console.log(`${e.code}`);
     switch (e.code) {
         case "KeyA":
             console.log();
-            x -= 25
+            x -= STEP;
 
             if ( x <= -50) {
                 x = window.innerWidth;
@@ -28,31 +26,59 @@ function logKey(e) {
             console.log("W")
         break;
         case "KeyD":
-            x += 25
+            x += STEP
             let divMaster = document.querySelector('.game-container');
             if ( x >= window.innerWidth) {
                 x = -50;
             }
             nau.style.left = x + "px";
-            console.log(window.innerWidth)
-            console.log(nau.style.left)
-            console.log(x)
         break;
         case "KeyS":
             console.log("S")
             
         break;
+        case "Space":
+            console.log("Space");
+            shot(x);
  }
 }
 
-document.onkeypress = function (e) {
-
+function shot(position) {
     
+    let bullet = document.createElement('div');
+    bullet.setAttribute('class', 'bullet');
+    //bullet.setAttribute('style', 'animation: shotFX 3s;');
 
-    
-    
-};
+    bullet.style.left = position + 25 + "px";
+    bullet.style.top = y + "px";
 
+    document.querySelector('.game-container').appendChild(bullet);
+
+    translate( bullet, position+25, 0 );
+
+
+
+}
+
+function translate( elem, xt, yt ) {
+    var left = x + 25,
+        top = y,
+        dx = left - xt,
+        dy = top - yt,
+        i = 1,
+        count = 50,
+        delay = 50;
+
+    function loop() {
+        if ( i >= count ) { return; }
+        i += 1;
+        elem.style.left = ( left - ( dx * i / count ) ).toFixed( 0 ) + 'px';
+        elem.style.top = ( top - ( dy * i / count ) ).toFixed( 0 ) + 'px';
+        setTimeout( loop, delay );
+    }
+
+    loop();
+}
 
 const nauPlayer1 = document.getElementById("player1");
 const nauProperties = window.getComputedStyle(nauPlayer1, null)
