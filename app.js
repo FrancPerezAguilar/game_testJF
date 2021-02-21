@@ -1,4 +1,4 @@
-const STEP = 25;
+const STEP = 10;
 let nau = document.getElementById('player1');
 x = nau.offsetLeft;
 y = nau.offsetTop;
@@ -47,6 +47,7 @@ function shot(position) {
     
     let bullet = document.createElement('div');
     bullet.setAttribute('class', 'bullet');
+    bullet.setAttribute('id', 'bullet');
     //bullet.setAttribute('style', 'animation: shotFX 3s;');
 
     bullet.style.left = position + 25 + "px";
@@ -54,30 +55,29 @@ function shot(position) {
 
     document.querySelector('.game-container').appendChild(bullet);
 
-    translate( bullet, position+25, 0 );
+    translate( bullet, position+25, -5, 50, 20);
 
-
-
-}
-
-function translate( elem, xt, yt ) {
-    var left = x + 25,
-        top = y,
-        dx = left - xt,
-        dy = top - yt,
-        i = 1,
-        count = 50,
-        delay = 50;
-
-    function loop() {
-        if ( i >= count ) { return; }
-        i += 1;
-        elem.style.left = ( left - ( dx * i / count ) ).toFixed( 0 ) + 'px';
-        elem.style.top = ( top - ( dy * i / count ) ).toFixed( 0 ) + 'px';
-        setTimeout( loop, delay );
+    function translate( elem, xt, yt, count, delay ) {
+        var left = x + 25,
+            top = y,
+            dx = left - xt,
+            dy = top - yt,
+            i = 1;
+    
+        function loop() {
+            if ( i >= count ) { 
+                var item = document.getElementById("bullet");
+                item.parentNode.removeChild(item);
+                return; 
+            }
+            i += 1;
+            elem.style.left = ( left - ( dx * i / count ) ).toFixed( 0 ) + 'px';
+            elem.style.top = ( top - ( dy * i / count ) ).toFixed( 0 ) + 'px';
+            setTimeout( loop, delay );
+        }
+    
+        loop();
     }
-
-    loop();
 }
 
 const nauPlayer1 = document.getElementById("player1");
